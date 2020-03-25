@@ -65,6 +65,7 @@ class App extends Component {
      console.log("subject :", this.state.subject);
      console.log("from :", URL);
     //  console.table(this.state.news_api.articles);
+ 
       
   }
 
@@ -79,11 +80,15 @@ class App extends Component {
     return (
       <div>
         <Hello name={this.state.name} />
-        <label>
-    Subject:
 
-    <input type="text" value={this.state.subject} onChange={this.handleChange} />
-  </label> <br />
+               <label>
+     Subject:
+
+     <input type="text" value={this.state.subject} onChange={this.handleChange} />
+   </label> <br />
+
+<br />
+   
         <button onClick={() => this.handleClick()}>
           Get News from newsapi.org
         </button>
