@@ -9,6 +9,7 @@ class App extends Component {
     super();
     this.state = {
       name: "Dieter",
+      subject: "java",
       news_api: {
         status: "ok",
         source: "time",
@@ -32,14 +33,17 @@ class App extends Component {
         }
       ]
     };
+
+     this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick() {
     console.log("button clicked");
-    console.log("this is:", this);
+  //  console.log("this is:", this);
     let self = this;
+    var currentSubject = this.state.subject;
     var URL =
-      "https://newsapi.org/v2/everything?q=software&sortBy=publishedAt&apiKey=1d825f6378f2460d8bcf7edc35915e0f";
+      "https://newsapi.org/v2/everything?q=" + currentSubject + "&sortBy=publishedAt&apiKey=1d825f6378f2460d8bcf7edc35915e0f";
 
     axios
       .get(URL)
@@ -56,18 +60,30 @@ class App extends Component {
       .catch(function(error) {
         console.log(error);
       });
-           console.log("logging myArticles");
-    console.log("this is:",this);
-     console.table(this.state.news_api.articles);
+     //      console.log("logging myArticles");
+    // console.log("this is:",this);
+     console.log("subject :", this.state.subject);
+     console.log("from :", URL);
+    //  console.table(this.state.news_api.articles);
+      
+  }
 
+  handleChange(event) {
+      let self = this;
+    self.setState({subject: event.target.value});
   }
 
   render() {
-    console.log("render");
+    console.log("rendering");
 
     return (
       <div>
         <Hello name={this.state.name} />
+        <label>
+    Subject:
+
+    <input type="text" value={this.state.subject} onChange={this.handleChange} />
+  </label> <br />
         <button onClick={() => this.handleClick()}>
           Get News from newsapi.org
         </button>
